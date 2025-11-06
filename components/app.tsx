@@ -5,7 +5,7 @@ import { Leaderboard } from "@/components/leaderboard";
 import { RiotIdSearch } from "@/components/riot-id-search";
 import { Button } from "@/components/ui/button";
 import { session } from "@/lib/helpers";
-import { Trophy } from "lucide-react";
+import { Trophy, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
@@ -42,14 +42,14 @@ export default function App() {
                 <Trophy className="h-6 w-6 text-[#15b1a7]" />
               </motion.div>
               <span className="font-bold font-heading">
-                Rift <span className="text-[#d6b05d]">Rewind</span>
+                Rift <span className="text-lol-gold">Rewind</span>
               </span>
             </div>
             <div className="text-sm text-white/80 flex items-center gap-2">
               {selected ? (
                 <>
                   <span>
-                    Selected:{" "}
+                    <Users className="h-4 w-4 text-[#15b1a7]" />
                     <span className="font-medium">{selected.game_name}</span>
                     <span className="text-xs">#{selected.tag_line}</span>
                   </span>
@@ -58,7 +58,7 @@ export default function App() {
                   </Button>
                 </>
               ) : (
-                <span>No player selected</span>
+                <span>{"  "}</span>
               )}
             </div>
           </div>

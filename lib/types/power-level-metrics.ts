@@ -1,5 +1,6 @@
-export interface PowerLevelMetrics {
-  id: string;
+import { DefaultEntity } from "./default";
+
+export interface PowerLevelMetrics extends DefaultEntity {
   match_id: string;
   puuid: string;
   champion_name: string;
@@ -12,16 +13,16 @@ export interface PowerLevelMetrics {
   kills: number;
   deaths: number;
   assists: number;
-  kda: number;
+  kda: string;
   total_damage_dealt: number;
   total_damage_taken: number;
-  damage_per_minute: number | null;
+  damage_per_minute: string | null;
   team_damage_percentage: number | null;
   damage_taken_on_team_percentage: number | null;
   total_gold: number | null;
   gold_per_minute: number | null;
   cs_count: number | null;
-  cs_per_minute: number | null;
+  cs_per_minute: string | null;
   vision_score: number | null;
   wards_placed: number | null;
   wards_destroyed: number | null;
@@ -45,7 +46,7 @@ export interface PowerLevelMetrics {
   largest_killing_spree: number | null;
   first_blood_taken: boolean | null;
   first_blood_assist: boolean | null;
-  kill_participation: number | null;
+  kill_participation: string | null;
   full_team_takedowns: number | null;
   save_ally_from_death: number | null;
   pick_kill_with_ally: number | null;

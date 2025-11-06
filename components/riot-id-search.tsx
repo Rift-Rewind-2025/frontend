@@ -37,12 +37,13 @@ export function RiotIdSearch({ onResolved }: { onResolved: (p: { puuid: string; 
       <CardContent>
         <div className="flex gap-2">
           <Input
+          className="text-white"
             placeholder="GameName#TagLine"
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={onKeyDown}
           />
-          <Button onClick={handleResolve} className="border border-[rgba(214,176,93,.25)]" disabled={loading || !value.includes("#")}>
+          <Button onClick={handleResolve} className="border border-[rgba(214,176,93,.25)] hover-" disabled={loading || !value.includes("#")}>
             {loading ? <Loader2 className="h-4 w-4 animate-spin"/> : "Search"}
           </Button>
         </div>

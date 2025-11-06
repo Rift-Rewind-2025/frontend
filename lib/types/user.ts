@@ -1,5 +1,6 @@
-export interface User {
-  id: number;
+import { DefaultEntity } from "./default";
+
+export interface User extends DefaultEntity {
   puuid: string;
   game_name: string;
   tag_line: string;
