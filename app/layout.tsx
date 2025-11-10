@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, League_Spartan } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -9,6 +10,10 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const leagueSpartan = League_Spartan({
   subsets: ["latin"],
 });
 
@@ -24,10 +29,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${leagueSpartan.className} antialiased`}>
+        <div className="min-h-screen relative overflow-hidden bg-[#0b0f12] text-white">
+          <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(rgba(214,176,93,.08)_1px,transparent_1px),radial-gradient(rgba(21,177,167,.06)_1px,transparent_1px)] [background-size:20px_20px] [background-position:0_0,10px_10px] opacity-40" />
+          <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(1200px_600px_at_50%_-10%,rgba(21,177,167,.12),transparent_40%),radial-gradient(900px_500px_at_100%_0%,rgba(214,176,93,.12),transparent_40%)]" />
+          <div className="relative z-10">
+            <Header />
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );
