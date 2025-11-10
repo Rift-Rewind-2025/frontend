@@ -1,8 +1,6 @@
-import { PowerLevel, PowerLevelMetrics, User } from "./types";
+import { PowerLevel, PowerLevelMetrics, User, YearlyWrapped } from "./types";
 // FETCH
-const baseUrl =
-  process.env.API_BASE_URL ||
-  "https://vcjbhrvzwc5byvjkmbkci36ztu0vzlzv.lambda-url.us-east-2.on.aws";
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
 async function fetchJSON<T>(
   path: string,
@@ -21,7 +19,7 @@ async function fetchJSON<T>(
 
 export async function resolveRiotId(riotId: string) {
   // riotId format: GameName#TagLine
-  console.log()
+  console.log();
   return fetchJSON<{ puuid: string; gameName: string; tagLine: string }>(
     `/users/find-player-by-name/${riotId.split("#")[0]}/${
       riotId.split("#")[1]
@@ -65,9 +63,7 @@ export async function getMetrics(
     "GET"
   );
 }
-export async function getYearlyWrapped(
-  puuid: string
-): Promise<{ cards: any[] }> {
+export async function getYearlyWrapped(puuid: string): Promise<YearlyWrapped> {
   return fetchJSON(`/power-levels/${puuid}/wrapped`, "GET");
 }
 

@@ -43,9 +43,8 @@ export function RiotIdSearch({
         game_name: p.gameName,
         tag_line: p.tagLine,
       });
-      
-    } catch (e) {
-      setError(e?.message || "Failed to resolve player");
+    } catch {
+      setError("Failed to resolve player");
     } finally {
       setLoading(false);
     }
@@ -64,7 +63,7 @@ export function RiotIdSearch({
         </CardTitle>
         <CardDescription className="text-white/70">
           Enter Riot ID as <span className="font-mono">GameName#TagLine</span>{" "}
-          (e.g., <span className="font-mono">WotterMelown#NA1</span>).
+          (e.g., <span className="font-mono">CoolGamer#NA1</span>).
         </CardDescription>
       </CardHeader>
       <CardContent>

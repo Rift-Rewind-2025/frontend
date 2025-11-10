@@ -1,12 +1,5 @@
-import {
-  formatPercent,
-  getMetrics,
-  getUserByPlayerId,
-  getUsers,
-  secondsToClock,
-  tierFromPowerLevel,
-} from "@/lib/helpers";
-import { PowerLevelMetrics, User } from "@/lib/types";
+import { getUserByPlayerId, getUsers } from "@/lib/helpers";
+import { User } from "@/lib/types";
 import { useEffect, useMemo, useState } from "react";
 import {
   Card,
@@ -15,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { Badge, Crown, Loader2, Trophy, Users } from "lucide-react";
+import { Crown, Loader2, Trophy, Users } from "lucide-react";
 import {
   Table,
   TableBody,
