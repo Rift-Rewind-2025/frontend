@@ -43,9 +43,8 @@ export function RiotIdSearch({
         game_name: p.gameName,
         tag_line: p.tagLine,
       });
-      
-    } catch (e) {
-      setError(e?.message || "Failed to resolve player");
+    } catch {
+      setError("Failed to resolve player");
     } finally {
       setLoading(false);
     }
