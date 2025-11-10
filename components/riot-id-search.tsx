@@ -64,7 +64,7 @@ export function RiotIdSearch({
         </CardTitle>
         <CardDescription className="text-white/70">
           Enter Riot ID as <span className="font-mono">GameName#TagLine</span>{" "}
-          (e.g., <span className="font-mono">WotterMelown#NA1</span>).
+          (e.g., <span className="font-mono">CoolGamer#NA1</span>).
         </CardDescription>
       </CardHeader>
       <CardContent>

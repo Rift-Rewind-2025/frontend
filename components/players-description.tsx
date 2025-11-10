@@ -1,5 +1,5 @@
 "use client";
-import { PowerLevelMetrics, User } from "@/lib/types";
+import { PowerLevelMetrics, User, YearlyWrapped } from "@/lib/types";
 import {
   Table,
   TableBody,
@@ -17,6 +17,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTrigger,
 } from "./ui/dialog";
@@ -31,6 +32,7 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { Badge } from "./ui/badge";
 
 type Props = {
   player: User;
@@ -38,7 +40,7 @@ type Props = {
 };
 
 export default function PlayersDescription({ player, playerMetrics }: Props) {
-  const [yearlyWrapped, setYearlyWrapped] = useState<{ cards: any[] } | null>(
+  const [yearlyWrapped, setYearlyWrapped] = useState<YearlyWrapped | null>(
     null
   );
   const handleGetYearlyWrapped = async () => {
@@ -75,48 +77,65 @@ export default function PlayersDescription({ player, playerMetrics }: Props) {
                   </DialogDescription>
                 </DialogHeader>
                 {yearlyWrapped ? (
-                  <Tabs defaultValue={yearlyWrapped.cards[0].id}>
-                    <TabsList>
+                  <>
+                    <Tabs defaultValue={yearlyWrapped.cards[0].id}>
+                      <TabsList>
+                        {yearlyWrapped.cards.map((card) => (
+                          <TabsTrigger key={card.id} value={card.id}>
+                            {card.emoji} {card.title}
+                          </TabsTrigger>
+                        ))}
+                      </TabsList>
                       {yearlyWrapped.cards.map((card) => (
-                        <TabsTrigger key={card.id} value={card.id}>
-                          {card.emoji} {card.title}
-                        </TabsTrigger>
+                        <TabsContent key={card.id} value={card.id}>
+                          <Card>
+                            <CardHeader>
+                              <CardTitle className="text-2xl font-bold">
+                                {card.title} {card.emoji}
+                              </CardTitle>
+                              <CardDescription className="text-xl font-semibold">
+                                {card.subtitle}
+                              </CardDescription>
+                              <CardAction className="self-center italic font-semibold text-lol-gold text-wrap w-[350px]">
+                                {card.joke}
+                              </CardAction>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="flex flex-col gap-4">
+                                <h3 className="text-lg">{card.body}</h3>
+                                <h4 className="text-md font-semibold">
+                                  What was analyzed?
+                                </h4>
+                                {card.explanations.map((exp) => (
+                                  <h5 key={exp.metric} className="italic">
+                                    {exp.metric} •{" "}
+                                    <span className="text-white/70">
+                                      {exp.text}
+                                    </span>
+                                  </h5>
+                                ))}
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </TabsContent>
                       ))}
-                    </TabsList>
-                    {yearlyWrapped.cards.map((card) => (
-                      <TabsContent key={card.id} value={card.id}>
-                        <Card>
-                          <CardHeader>
-                            <CardTitle className="text-2xl font-bold">
-                              {card.title} {card.emoji}
-                            </CardTitle>
-                            <CardDescription className="text-xl font-semibold">
-                              {card.subtitle}
-                            </CardDescription>
-                            <CardAction className="self-center italic font-semibold text-lol-gold text-wrap w-[350px]">
-                              {card.joke}
-                            </CardAction>
-                          </CardHeader>
-                          <CardContent>
-                            <div className="flex flex-col gap-4">
-                              <h3 className="text-lg">{card.body}</h3>
-                              <h4 className="text-md font-semibold">
-                                What was analyzed?
-                              </h4>
-                              {card.explanations.map((exp) => (
-                                <h5 key={exp.metric} className="italic">
-                                  {exp.metric} •{" "}
-                                  <span className="text-white/70">
-                                    {exp.text}
-                                  </span>
-                                </h5>
-                              ))}
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </TabsContent>
+                    </Tabs>
+                    <h3 className="text-3xl font-bold">Weaknesses</h3>
+                    {yearlyWrapped.weaknesses.map((weakness) => (
+                      <div
+                        key={weakness.metric}
+                        className="flex flex-col gap-4"
+                      >
+                        <h5 className="italic items-center">
+                          {weakness.metric} •{" "}
+                          <Badge className="font-semibold" variant="destructive">{weakness.label}</Badge>
+                        </h5>
+                        <h4 className="text-white/70">
+                          {weakness.specific_fix}
+                        </h4>
+                      </div>
                     ))}
-                  </Tabs>
+                  </>
                 ) : (
                   <div className="flex items-center gap-2 text-white/70">
                     <Loader2 className="h-4 w-4 animate-spin" /> Loading wrapped
