@@ -35,7 +35,7 @@ export default function Header() {
               <Trophy className="h-6 w-6 text-[#15b1a7]" />
             </motion.div>
             <Link href={"/"} className="font-bold font-heading">
-              Rift <span className="text-lol-gold">Rewind</span>
+              Elo <span className="text-lol-gold">Echo</span>
             </Link>
           </div>
           <Link href={"/gold-game"}>Gold Game</Link>
